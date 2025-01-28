@@ -1,12 +1,16 @@
 import React from "react";
 
-import Navigation from "./Navigation";
 import { PaperProvider } from "react-native-paper";
+import { GameProvider } from "./context/GameContext"
+
+import Navigation from "./Navigation";
 
 const App = () => {
 	return (
 		<PaperProvider>
-			<Navigation />
+			<GameProvider>
+				<Navigation />
+			</GameProvider>
 		</PaperProvider>
 	)
 }

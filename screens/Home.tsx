@@ -11,8 +11,8 @@ const Home = () => {
 
     return (
         <>
-            <Button title="navegar" onPress={() => navigation.navigate("game")}></Button>
-            {/* <Text>Teste</Text> */}
+            <Text>Home</Text>
+            <Button title="Novo jogo" onPress={() => navigation.navigate("cadastro")} />
         </>
     )
 }
