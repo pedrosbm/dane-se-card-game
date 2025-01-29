@@ -19,7 +19,7 @@ const Cadastro = () => {
 
     return (
         <View>
-            <Text>Game</Text>
+            <Text>Cadastro</Text>
             {/* Modal de criação de jogador */}
             <Portal>
                 <Modal visible={visible} onDismiss={() => setVisible(false)} contentContainerStyle={modalStyle} >
@@ -47,6 +47,7 @@ const Cadastro = () => {
                 )} />
             </View>
 
+            {players.length > 1 ? <Button title="Jogar" /> : <Text>É necessário ter 2 jogadores ou mais</Text>}
         </View>
     )
 }
