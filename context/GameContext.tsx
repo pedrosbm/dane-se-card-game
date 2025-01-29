@@ -1,16 +1,6 @@
 import { createContext, PropsWithChildren, useEffect, useState } from "react";
 import { Player } from "../types/player";
-
-type GameContextType = {
-    players: Player[],
-    round: number,
-    fase: number,
-    newPlayer: (name: string) => void,
-    removePlayer: (name: string) => void,
-    setFase: (fase: number) => void,
-    setRound: (round: number) => void,
-    score: (name: string) => void
-}
+import { GameContextType } from "../types/gameContext";
 
 const GameContext = createContext<GameContextType>({} as GameContextType);
 
@@ -18,7 +8,7 @@ const GameProvider = ({ children }: PropsWithChildren) => {
     // Estados gerenciados pelo contexto de jogo
     const [players, setPlayers] = useState<Player[]>([]);
     const [round, setRound] = useState<number>(1);
-    const [fase, setFase] = useState<number>(1);
+    const [fase, setFase] = useState<number>(0);
 
     /**
      * Função para adicionar jogadores ao jogo.
@@ -41,26 +31,44 @@ const GameProvider = ({ children }: PropsWithChildren) => {
     /**
      * Função pra remover jogadores do jogo.
      * @param name Nome do jogador a ser removido
-     */
+    */
     const removePlayer = (name: string) => {
         setPlayers(players.filter(player => player.nome !== name));
     }
 
     /**
+     * Função que muda a aposta atual do jogador.
+     * @param name Nome do jogador a apostar
+     * @param bet Número de jogos ganhos que o jogador irá apostar
+    */
+    const setBet = (name: string, bet: number) => {
+        const updatedPlayers = players.map(player => (
+            player.nome === name ? { ...player, aposta: bet } : player
+        ))
+        setPlayers(updatedPlayers)
+    }
+
+    const resetBet = () => {
+        const updatedPlayers = players.map(player => ({ ...player, aposta: 0 }))
+
+        setPlayers(updatedPlayers)
+    }
+
+    /**
      * Função pra pontuar com base no nome do jogador e o seu valor da aposta na rodada.
      * @param name Nome do jogador a ser pontuado
-     */
+    */
     const score = (name: string) => {
         const updatedPlayers = players.map(player =>
             player.nome === name ? { ...player, pontos: player.pontos + player.aposta + 10 } : player
-        );
-        setPlayers(updatedPlayers);
+        )
+        setPlayers(updatedPlayers)
     }
 
     return (
         <GameContext.Provider
             value={{
-                players, round, newPlayer, setRound, removePlayer, fase, setFase, score
+                players, round, newPlayer, setRound, removePlayer, fase, setFase, score, setBet, resetBet
             }}>
             {children}
         </GameContext.Provider>

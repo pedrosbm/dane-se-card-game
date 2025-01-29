@@ -6,7 +6,6 @@ import { Button, Text } from "react-native";
 import { GameNavigationProp } from "../types/navigation";
 
 const Home = () => {
-
     const navigate = useNavigation<GameNavigationProp>().navigate
 
     return (

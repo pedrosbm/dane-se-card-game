@@ -45,7 +45,7 @@ const Cadastro = () => {
                 <Button title="Novo jogador" onPress={() => setVisible(true)} />
 
                 {/* lista de jogadores */}
-                <Players removable={true} punctuable={false}/>
+                <Players removable={true} />
             </View>
 
             {players.length > 1 ?
