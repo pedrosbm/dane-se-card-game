@@ -7,12 +7,12 @@ import { GameNavigationProp } from "../types/navigation";
 
 const Home = () => {
 
-    const navigation = useNavigation<GameNavigationProp>()
+    const navigate = useNavigation<GameNavigationProp>().navigate
 
     return (
         <>
             <Text>Home</Text>
-            <Button title="Novo jogo" onPress={() => navigation.navigate("cadastro")} />
+            <Button title="Novo jogo" onPress={() => navigate("cadastro")} />
         </>
     )
 }

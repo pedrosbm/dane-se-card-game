@@ -1,7 +1,8 @@
 type Player = {
-    nome: string;
-    pontos: number;
-    aposta: number;
+    nome: string,
+    color: string,
+    pontos: number,
+    aposta: number
 }
 
 export type { Player };

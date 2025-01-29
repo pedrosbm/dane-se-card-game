@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { Button, FlatList, Text, TextInput, View } from "react-native";
 import { GameContext } from "../context/GameContext";
 import { Modal, Portal } from "react-native-paper";
+import { useNavigation } from "@react-navigation/native";
+import { GameNavigationProp } from "../types/navigation";
 
 const Cadastro = () => {
     const [visible, setVisible] = useState<boolean>(false)
@@ -10,6 +12,8 @@ const Cadastro = () => {
     const { players, newPlayer } = useContext(GameContext)
 
     const modalStyle = { padding: 20, backgroundColor: "white" }
+
+    const navigate = useNavigation<GameNavigationProp>().navigate
 
     const addPlayer = () => {
         newPlayer(nome)
@@ -47,7 +51,8 @@ const Cadastro = () => {
                 )} />
             </View>
 
-            {players.length > 1 ? <Button title="Jogar" /> : <Text>É necessário ter 2 jogadores ou mais</Text>}
+            {players.length > 1 ?
+                <Button onPress={() => navigate("game")} title="Jogar" /> : <Text>É necessário ter 2 jogadores ou mais</Text>}
         </View>
     )
 }
