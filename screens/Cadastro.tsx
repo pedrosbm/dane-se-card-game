@@ -4,12 +4,13 @@ import { GameContext } from "../context/GameContext";
 import { Modal, Portal } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { GameNavigationProp } from "../types/navigation";
+import Players from "../components/Players";
 
 const Cadastro = () => {
     const [visible, setVisible] = useState<boolean>(false)
     const [nome, setNome] = useState<string>("")
 
-    const { players, newPlayer } = useContext(GameContext)
+    const { newPlayer, players } = useContext(GameContext)
 
     const modalStyle = { padding: 20, backgroundColor: "white" }
 
@@ -44,11 +45,7 @@ const Cadastro = () => {
                 <Button title="Novo jogador" onPress={() => setVisible(true)} />
 
                 {/* lista de jogadores */}
-                <FlatList data={players} renderItem={({ item }) => (
-                    <View>
-                        <Text>{item.nome}</Text>
-                    </View>
-                )} />
+                <Players removable={true} punctuable={false}/>
             </View>
 
             {players.length > 1 ?

@@ -1,6 +1,9 @@
 type Player = {
     nome: string,
-    color: string,
+    color: {
+        value: string,
+        contrast: string
+    },
     pontos: number,
     aposta: number
 }

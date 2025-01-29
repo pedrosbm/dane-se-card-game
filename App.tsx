@@ -3,13 +3,13 @@ import React from "react";
 import { PaperProvider } from "react-native-paper";
 import { GameProvider } from "./context/GameContext"
 
-import Navigation from "./Navigation";
+import Index from "./Index";
 
 const App = () => {
 	return (
 		<PaperProvider>
 			<GameProvider>
-				<Navigation />
+				<Index />
 			</GameProvider>
 		</PaperProvider>
 	)
