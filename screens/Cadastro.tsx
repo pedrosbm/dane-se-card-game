@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View } from "react-native";
-import { Text, Button, IconButton, TextInput } from "react-native-paper";
+import { Text, Button, TextInput } from "react-native-paper";
 import { GameContext } from "../context/GameContext";
 import { Modal, Portal } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
@@ -21,12 +21,9 @@ const Cadastro = () => {
         navigation.setOptions({
             // Abre modal
             headerRight: () => (
-                <IconButton
-                    icon="plus"
-                    iconColor={"black"}
-                    size={20}
-                    onPress={() => setVisible(true)}
-                />
+                <Button icon="plus" mode="text" onPress={() => setVisible(true)}>
+                    Novo jogador
+                </Button>
             )
         })
     }, [])
@@ -40,7 +37,7 @@ const Cadastro = () => {
     return (
         <View style={{ padding: 10 }}>
             {players.length > 1 ?
-                <Button style={{marginBottom: 10}} mode="contained" onPress={() => navigation.navigate("game")}>Jogar</Button> : <Text>É necessário ter 2 jogadores ou mais</Text>}
+                <Button style={{ marginBottom: 10 }} mode="contained" onPress={() => navigation.navigate("game")}>Jogar</Button> : <Text>É necessário ter 2 jogadores ou mais</Text>}
 
             {/* Modal de criação de jogador */}
             <Portal>
