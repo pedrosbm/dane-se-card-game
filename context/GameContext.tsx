@@ -7,7 +7,7 @@ const GameContext = createContext<GameContextType>({} as GameContextType);
 const GameProvider = ({ children }: PropsWithChildren) => {
     // Estados gerenciados pelo contexto de jogo
     const [players, setPlayers] = useState<Player[]>([]);
-    const [round, setRound] = useState<number>(1);
+    const [round, setRound] = useState<number>(0);
     const [fase, setFase] = useState<number>(0);
 
     /**
@@ -48,6 +48,9 @@ const GameProvider = ({ children }: PropsWithChildren) => {
         setPlayers(updatedPlayers)
     }
 
+    /**
+     * Reseta o valor da aposta por rodada.
+     */
     const resetBet = () => {
         const updatedPlayers = players.map(player => ({ ...player, aposta: 0 }))
 
