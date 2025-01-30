@@ -21,9 +21,11 @@ const Cadastro = () => {
         navigation.setOptions({
             // Abre modal
             headerRight: () => (
-                <Button icon="plus" mode="text" onPress={() => setVisible(true)}>
-                    Novo jogador
-                </Button>
+                <View>
+                    <Button icon="plus" mode="text" onPress={() => setVisible(true)}>
+                        Novo jogador
+                    </Button>
+                </View>
             )
         })
     }, [])
