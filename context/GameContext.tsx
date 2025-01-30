@@ -19,6 +19,7 @@ const GameProvider = ({ children }: PropsWithChildren) => {
         const color = await fetch("https://www.thecolorapi.com/random")
             .then(response => { return response.json() })
             .then(json => { return { value: json.hex.value, contrast: json.contrast.value } })
+            .catch(error => {return {value: "#fff", contrast: "#999" }})
 
         setPlayers([...players, {
             nome: name,

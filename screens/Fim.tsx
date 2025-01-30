@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from "react"
 
-import { Button, Text, View } from "react-native"
+import { View } from "react-native"
 import { GameContext } from "../context/GameContext"
 import { useNavigation } from "@react-navigation/native"
 import { GameNavigationProp } from "../types/navigation"
+import { Text, Button } from "react-native-paper"
 
 import Players from "../components/Players"
 
@@ -25,10 +26,10 @@ const Fim = () => {
     }
 
     return (
-        <View>
-            <Text>Pódio</Text>
+        <View style={{ padding: 20, height: "100%" }}>
+            <Text style={{ textAlign: "center", fontSize: 40 }}>Resultado</Text>
             <Players removable={false} />
-            <Button onPress={handleEnding} title="Finalizar"/>
+            <Button mode="contained" onPress={handleEnding}>Finalizar</Button>
         </View>
     )
 }

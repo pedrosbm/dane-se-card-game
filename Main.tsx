@@ -15,8 +15,8 @@ const Main = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen options={{headerShown: true, headerTitle: "Jogadores"}} name="cadastro" component={Cadastro} />
         <Stack.Screen name="home" component={Home} />
+        <Stack.Screen options={{headerShown: true, headerTitle: "Jogadores"}} name="cadastro" component={Cadastro} />
         <Stack.Screen name="game" component={Game} />
         <Stack.Screen name="fim" component={Fim} />
       </Stack.Navigator>
