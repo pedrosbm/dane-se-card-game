@@ -1,15 +1,15 @@
 import React, { useContext } from "react"
 import { Button, FlatList, Text, View } from "react-native"
 import { GameContext } from "../context/GameContext"
-import BetSelector from "./BetSelector"
 import { Icon } from "react-native-paper"
+
+import BetSelector from "./BetSelector"
 
 type PlayersProps = {
     removable: boolean
 }
 
 const Players = ({ removable }: PlayersProps) => {
-
     const { removePlayer, players, score, fase } = useContext(GameContext)
 
     return (

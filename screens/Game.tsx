@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from "react"
 import { GameContext } from "../context/GameContext"
-import Players from "../components/Players"
 import { Button, Text, View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { GameNavigationProp } from "../types/navigation"
+
+import Players from "../components/Players"
 
 const Game = () => {
     const { round, setRound, fase, setFase, resetBet } = useContext(GameContext)
@@ -19,8 +20,6 @@ const Game = () => {
 
     const nextRound = () => {
         if(round == 13){
-            setFase(0)
-            setRound(0)
             navigate("fim")
         }
         setFase(1)

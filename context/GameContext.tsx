@@ -71,7 +71,7 @@ const GameProvider = ({ children }: PropsWithChildren) => {
     return (
         <GameContext.Provider
             value={{
-                players, round, newPlayer, setRound, removePlayer, fase, setFase, score, setBet, resetBet
+                players, round, newPlayer, setRound, removePlayer, fase, setFase, score, setBet, resetBet, setPlayers
             }}>
             {children}
         </GameContext.Provider>
