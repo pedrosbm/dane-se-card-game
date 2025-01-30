@@ -1,5 +1,6 @@
-import React, { useContext, useState } from "react";
-import { Button, FlatList, Text, TextInput, View } from "react-native";
+import React, { useContext, useEffect, useState } from "react";
+import { View } from "react-native";
+import { Text, Button, IconButton, TextInput } from "react-native-paper";
 import { GameContext } from "../context/GameContext";
 import { Modal, Portal } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
@@ -12,9 +13,23 @@ const Cadastro = () => {
 
     const { newPlayer, players } = useContext(GameContext)
 
-    const modalStyle = { padding: 20, backgroundColor: "white" }
+    const modalStyle = { margin: 20, padding: 20, backgroundColor: "white" }
 
-    const navigate = useNavigation<GameNavigationProp>().navigate
+    const navigation = useNavigation<GameNavigationProp>()
+
+    useEffect(() => {
+        navigation.setOptions({
+            // Abre modal
+            headerRight: () => (
+                <IconButton
+                    icon="plus"
+                    iconColor={"black"}
+                    size={20}
+                    onPress={() => setVisible(true)}
+                />
+            )
+        })
+    }, [])
 
     const addPlayer = () => {
         newPlayer(nome)
@@ -23,33 +38,34 @@ const Cadastro = () => {
     }
 
     return (
-        <View>
-            <Text>Cadastro</Text>
+        <View style={{ padding: 10 }}>
+            {players.length > 1 ?
+                <Button style={{marginBottom: 10}} mode="contained" onPress={() => navigation.navigate("game")}>Jogar</Button> : <Text>É necessário ter 2 jogadores ou mais</Text>}
+
             {/* Modal de criação de jogador */}
             <Portal>
                 <Modal visible={visible} onDismiss={() => setVisible(false)} contentContainerStyle={modalStyle} >
                     <View>
                         <View>
-                            <TextInput onChangeText={setNome} value={nome} />
+                            <TextInput
+                                label="Nome"
+                                value={nome}
+                                onChangeText={setNome}
+                                mode="outlined"
+                            />
                         </View>
-                        <View>
-                            <Button title="cancelar" onPress={() => setVisible(false)} />
-                            <Button title="confirmar" onPress={() => addPlayer()} />
+
+                        <View style={{ flexDirection: "row", justifyContent: "flex-end", gap: 10, marginTop: 10 }}>
+                            <Button mode="outlined" onPress={() => setVisible(false)}>Cancelar</Button>
+                            <Button mode="contained" onPress={() => addPlayer()}>Confirmar</Button>
                         </View>
                     </View>
                 </Modal>
             </Portal>
 
-            <View>
-                {/* Abre modal */}
-                <Button title="Novo jogador" onPress={() => setVisible(true)} />
+            {/* lista de jogadores */}
+            <Players removable={true} />
 
-                {/* lista de jogadores */}
-                <Players removable={true} />
-            </View>
-
-            {players.length > 1 ?
-                <Button onPress={() => navigate("game")} title="Jogar" /> : <Text>É necessário ter 2 jogadores ou mais</Text>}
         </View>
     )
 }

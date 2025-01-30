@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Player } from "../types/player";
 import { GameContext } from "../context/GameContext";
-import { Button, Text, View } from "react-native";
+import { View } from "react-native";
+import { Button, Text } from "react-native-paper"
 
 type BetSelectorProps = {
     player: Player
@@ -17,9 +18,9 @@ const BetSelector = ({ player }: BetSelectorProps) => {
 
     return (
         <View>
-            <Button disabled={value == 0} onPress={() => setValue(value - 1)} title="-" />
+            <Button disabled={value == 0} onPress={() => setValue(value - 1)} mode="contained">-</Button>
             <Text>{player.aposta}</Text>
-            <Button onPress={() => setValue(value + 1)} title="+" />
+            <Button onPress={() => setValue(value + 1)} mode="contained">+</Button>
         </View>
     )
 }

@@ -1,12 +1,12 @@
 import React, { useContext } from "react"
-import { Button, FlatList, Text, View } from "react-native"
+import { FlatList, View } from "react-native"
 import { GameContext } from "../context/GameContext"
-import { Icon } from "react-native-paper"
+import { Button, Avatar, Card, Text, IconButton } from "react-native-paper"
 
 import BetSelector from "./BetSelector"
 
 type PlayersProps = {
-    removable: boolean
+    removable: boolean,
 }
 
 const Players = ({ removable }: PlayersProps) => {
@@ -14,25 +14,28 @@ const Players = ({ removable }: PlayersProps) => {
 
     return (
         <FlatList contentContainerStyle={{ display: "flex", gap: 5 }} data={players} renderItem={({ item }) => (
-            <View style={{ padding: 5, backgroundColor: item.color.value }}>
-                {removable && <Button onPress={() => removePlayer(item.nome)} title="remover" />}
+            <Card style={{ padding: 5, backgroundColor: item.color.value }}>
+                {removable &&
+                    <IconButton onPress={() => removePlayer(item.nome)} iconColor={item.color.contrast} icon={"delete"} />
+                }
 
                 {/* Jogador */}
-                <View>
-                    {/* TODO achar um ícone bom */}
-                    <Icon source={"avatar"} size={20} />
-                    <View>
-                        <Text style={{ color: item.color.contrast }}>{item.nome}</Text>
-                        <Text style={{ color: item.color.contrast }}>{item.pontos}</Text>
+                <Card.Content>
+                    <View style={{ flexDirection: "row", alignItems: "center" }}>
+                        <Avatar.Icon size={50} icon="account" />
+                        <View style={{ marginLeft: 10 }}>
+                            <Text style={{ color: item.color.contrast }}>{item.nome}</Text>
+                            <Text style={{ color: item.color.contrast }}>{item.pontos} Pontos</Text>
+                        </View>
                     </View>
-                </View>
+                </Card.Content>
 
                 {/* Controles */}
-                <View>
+                <Card.Actions>
                     {fase == 1 && <BetSelector player={item} />}
-                    {fase == 2 && <Button onPress={() => score(item.nome)} title="Pontuar" />}
-                </View>
-            </View>
+                    {fase == 2 && <Button mode="contained" onPress={() => score(item.nome)}>Pontuar</Button>}
+                </Card.Actions>
+            </Card>
         )} />
     )
 }

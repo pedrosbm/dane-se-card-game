@@ -11,17 +11,17 @@ import Fim from "./screens/Fim";
 
 const Stack = createNativeStackNavigator<GameNavigation>();
 
-const Index = () => {
+const Main = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen options={{headerShown: true, headerTitle: "Jogadores"}} name="cadastro" component={Cadastro} />
         <Stack.Screen name="home" component={Home} />
-        <Stack.Screen options={{ headerShown: false }} name="cadastro" component={Cadastro} />
-        <Stack.Screen options={{ headerShown: false }} name="game" component={Game} />
-        <Stack.Screen options={{ headerShown: true }} name="fim" component={Fim} />
+        <Stack.Screen name="game" component={Game} />
+        <Stack.Screen name="fim" component={Fim} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
-export default Index;
+export default Main;

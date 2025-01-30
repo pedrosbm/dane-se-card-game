@@ -1,15 +1,15 @@
 import React from "react";
 
-import { PaperProvider } from "react-native-paper";
+import { MD3LightTheme, PaperProvider } from "react-native-paper";
 import { GameProvider } from "./context/GameContext"
 
-import Index from "./Index";
+import Main from "./Main";
 
 const App = () => {
 	return (
-		<PaperProvider>
+		<PaperProvider theme={MD3LightTheme}>
 			<GameProvider>
-				<Index />
+				<Main />
 			</GameProvider>
 		</PaperProvider>
 	)
