@@ -1,33 +1,28 @@
 import React, { useContext, useEffect, useState } from "react";
 import { View } from "react-native";
-import { Text, Button, TextInput } from "react-native-paper";
+import { Text, Button, TextInput, useTheme } from "react-native-paper";
 import { GameContext } from "../context/GameContext";
 import { Modal, Portal } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { GameNavigationProp } from "../types/navigation";
 import Players from "../components/Players";
+import Header from "../components/Header";
 
 const Cadastro = () => {
+    // States
     const [visible, setVisible] = useState<boolean>(false)
     const [nome, setNome] = useState<string>("")
 
+    // Contexto de jogo
     const { newPlayer, players } = useContext(GameContext)
 
-    const modalStyle = { margin: 20, padding: 20, backgroundColor: "white" }
-
+    // Hooks
     const navigation = useNavigation<GameNavigationProp>()
+    const theme = useTheme()
 
+    // Header
     useEffect(() => {
-        navigation.setOptions({
-            // Abre modal
-            headerRight: () => (
-                <View>
-                    <Button icon="plus" mode="text" onPress={() => setVisible(true)}>
-                        Novo jogador
-                    </Button>
-                </View>
-            )
-        })
+        navigation.setOptions(({header: () => <Header title="Novo jogo" buttons={[{icon:"plus", onPress:() => setVisible(true), text: "Novo jogador"}]}/>}))
     }, [])
 
     const addPlayer = () => {
@@ -37,13 +32,13 @@ const Cadastro = () => {
     }
 
     return (
-        <View style={{ padding: 10 }}>
+        <View style={{ height: "100%", padding: 10, backgroundColor: theme.colors.background }}>
             {players.length > 1 ?
                 <Button style={{ marginBottom: 10 }} mode="contained" onPress={() => navigation.navigate("game")}>Jogar</Button> : <Text>É necessário ter 2 jogadores ou mais</Text>}
 
             {/* Modal de criação de jogador */}
             <Portal>
-                <Modal visible={visible} onDismiss={() => setVisible(false)} contentContainerStyle={modalStyle} >
+                <Modal visible={visible} onDismiss={() => setVisible(false)} contentContainerStyle={{ margin: 20, padding: 20, backgroundColor: "white" }} >
                     <View>
                         <View>
                             <TextInput
