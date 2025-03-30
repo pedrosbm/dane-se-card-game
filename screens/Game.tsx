@@ -14,11 +14,6 @@ const Game = () => {
 
     const navigate = useNavigation<GameNavigationProp>().navigate
 
-    useEffect(() => {
-        setFase(1)
-        setRound(1)
-    }, [])
-
     const nextRound = () => {
         if (round == 13) {
             navigate("fim")

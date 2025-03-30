@@ -1,0 +1,1 @@
+export const modalStyle = { margin: 20, padding: 20, backgroundColor: "white" }

@@ -1,12 +1,16 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type GameNavigation = {
-    home: undefined,
-    cadastro: undefined,
-    game: undefined,
-    fim: undefined
+    // TODO implementar nova extrutura de telas do jogo principal
 }
-
 type GameNavigationProp = NativeStackNavigationProp<GameNavigation>;
 
-export type { GameNavigation, GameNavigationProp };
+type SignUpNavigation = {
+    home: undefined,
+    cadastro: undefined
+}
+
+type SignUpNavigationProp = NativeStackNavigationProp<SignUpNavigation>
+
+
+export type { GameNavigation, GameNavigationProp, SignUpNavigation, SignUpNavigationProp};
