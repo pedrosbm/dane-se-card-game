@@ -1,16 +1,17 @@
-import React, { useContext } from "react"
+import React, { PropsWithChildren, useContext } from "react"
 import { FlatList, View } from "react-native"
 import { GameContext } from "../context/GameContext"
 import { Button, Avatar, Card, Text, IconButton } from "react-native-paper"
 
 import BetSelector from "./BetSelector"
+import Score from "./Score"
 
 type PlayersProps = {
     removable: boolean,
 }
 
-const Players = ({ removable }: PlayersProps) => {
-    const { removePlayer, players, score, fase } = useContext(GameContext)
+const Players = ({ removable, children }: PropsWithChildren<PlayersProps>) => {
+    const { removePlayer, players, score } = useContext(GameContext)
 
     return (
         <FlatList contentContainerStyle={{ display: "flex", gap: 5 }} data={players} renderItem={({ item }) => (
@@ -24,12 +25,15 @@ const Players = ({ removable }: PlayersProps) => {
                             <Text style={{ color: item.color.contrast }}>{item.pontos} Pontos</Text>
                         </View>
                     </View>
+
+                    {/* Opções */}
                     <View style={{ justifyContent: "center" }}>
                         {removable &&
                             <IconButton size={40} onPress={() => removePlayer(item.nome)} iconColor={item.color.contrast} icon={"delete-circle"} />
                         }
-                        {fase == 1 && <BetSelector player={item} />}
-                        {fase == 2 && <Button mode="contained" onPress={() => score(item.nome)}>Pontuar</Button>}
+                        {/* TODO Retrabalhar */}
+                        {/* {fase == 1 && <BetSelector player={item} />}
+                        {fase == 2 && <Score player={item} />} */}
                     </View>
                 </Card.Content>
 
