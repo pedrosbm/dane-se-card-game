@@ -4,18 +4,18 @@ import { GameContext } from "../context/GameContext"
 import { Button, Avatar, Card, Text, IconButton } from "react-native-paper"
 
 import BetSelector from "./BetSelector"
-import Score from "./Score"
+import Score from "./ScoreButton"
 
 type PlayersProps = {
-    removable: boolean,
-}
+    fase?: number
+} 
 
-const Players = ({ removable, children }: PropsWithChildren<PlayersProps>) => {
-    const { removePlayer, players, score } = useContext(GameContext)
+const Players = ({fase} : PlayersProps) => {
+    const { removePlayer, players, score, round } = useContext(GameContext)
 
     return (
         <FlatList contentContainerStyle={{ display: "flex", gap: 5 }} data={players} renderItem={({ item }) => (
-            <Card style={{ padding: 5, backgroundColor: item.color.value }}>
+            <Card key={item.nome} style={{ padding: 5, backgroundColor: item.color.value }}>
                 {/* Jogador */}
                 <Card.Content style={{ flexDirection: "row", justifyContent: "space-between" }}>
                     <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -27,17 +27,12 @@ const Players = ({ removable, children }: PropsWithChildren<PlayersProps>) => {
                     </View>
 
                     {/* Opções */}
-                    <View style={{ justifyContent: "center" }}>
-                        {removable &&
-                            <IconButton size={40} onPress={() => removePlayer(item.nome)} iconColor={item.color.contrast} icon={"delete-circle"} />
-                        }
-                        {/* TODO Retrabalhar */}
-                        {/* {fase == 1 && <BetSelector player={item} />}
-                        {fase == 2 && <Score player={item} />} */}
+                    <View style={{ justifyContent: "center", flexDirection: "row-reverse" }}>
+                        {round == 0 && <IconButton size={40} onPress={() => removePlayer(item.nome)} iconColor={item.color.contrast} icon={"delete-circle"} />}
+                        {round > 0 && <BetSelector disabled={fase == 2} player={item} />}
+                        {fase == 2 && <Score player={item} />}
                     </View>
                 </Card.Content>
-
-                {/* Controles */}
             </Card>
         )} />
     )

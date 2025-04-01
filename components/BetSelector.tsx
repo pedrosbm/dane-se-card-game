@@ -5,10 +5,11 @@ import { View } from "react-native";
 import { Button, IconButton, Text } from "react-native-paper"
 
 type BetSelectorProps = {
-    player: Player
+    player: Player,
+    disabled: boolean
 }
 
-const BetSelector = ({ player }: BetSelectorProps) => {
+const BetSelector = ({ player, disabled }: BetSelectorProps) => {
     const [value, setValue] = useState<number>(0)
     const { setBet } = useContext(GameContext)
 
@@ -18,13 +19,13 @@ const BetSelector = ({ player }: BetSelectorProps) => {
 
     return (
         <View>
-            <Text style={{color: player.color.contrast}}>Aposta</Text>
+            <Text style={{ color: player.color.contrast }}>Aposta</Text>
             <View style={{ flexDirection: "row" }}>
-                <IconButton iconColor={player.color.contrast} icon="minus" disabled={value == 0} onPress={() => setValue(value - 1)} />
+                <IconButton iconColor={player.color.contrast} icon="minus" disabled={value == 0 || disabled} onPress={() => setValue(value - 1)} />
                 <View style={{ width: 50, alignItems: "center", justifyContent: "center" }}>
-                    <Text style={{fontSize: 15, color: player.color.contrast}}>{player.aposta}</Text>
+                    <Text style={{ fontSize: 15, color: player.color.contrast }}>{player.aposta}</Text>
                 </View>
-                <IconButton iconColor={player.color.contrast} icon="plus" onPress={() => setValue(value + 1)} />
+                <IconButton iconColor={player.color.contrast} icon="plus" disabled={disabled} onPress={() => setValue(value + 1)} />
             </View>
         </View>
     )

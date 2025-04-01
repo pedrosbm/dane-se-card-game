@@ -22,13 +22,19 @@ const Bet = () => {
         resetBet()
     }
 
+    useEffect(() => {
+
+    }, [])
+
     return (
-        <View style={{ height: "100%", padding: 20, gap: 10 }}>
+        <View style={{ height: "100%", padding: 10, gap: 10 }}>
             <View>
                 <Text style={{ textAlign: "center", fontSize: 40 }}>Round {round}</Text>
             </View>
 
-            <Players removable={false} />
+            <View style={{ height: "81%" }}>
+                <Players fase={1} />
+            </View >
 
             {/* TODO avanço para pontuação */}
         </View>

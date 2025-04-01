@@ -41,11 +41,7 @@ const Cadastro = () => {
     }
 
     return (
-        <View style={{ padding: 10 }}>
-            {players.length > 1 ?
-                <Button style={{ marginBottom: 10 }} mode="contained" onPress={() => setRound(1)}>Jogar</Button> : <Text>É necessário ter 2 jogadores ou mais</Text>
-            }
-
+        <>
             {/* Modal de criação de jogador */}
             <Portal>
                 <Modal visible={visible} onDismiss={() => setVisible(false)} contentContainerStyle={modalStyle} >
@@ -67,9 +63,18 @@ const Cadastro = () => {
                 </Modal>
             </Portal>
 
-            {/* lista de jogadores */}
-            <Players removable={true} />
-        </View>
+            {/* Tela*/}
+            <View style={{ padding: 10, height: "100%" }}>
+                {players.length > 1 ?
+                    <Button style={{ marginBottom: 10 }} mode="contained" onPress={() => setRound(1)}>Jogar</Button> : <Text>É necessário ter 2 jogadores ou mais</Text>
+                }
+
+                {/* lista de jogadores */}
+                <View style={{ height: "81%" }}>
+                    <Players />
+                </View>
+            </View>
+        </>
     )
 }
 

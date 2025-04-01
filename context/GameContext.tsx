@@ -8,7 +8,18 @@ const GameContext = createContext<GameContextType>({} as GameContextType);
 
 const GameProvider = ({ children }: PropsWithChildren) => {
     // Estados gerenciados pelo contexto de jogo
-    const [players, setPlayers] = useState<Player[]>([]);
+    const [players, setPlayers] = useState<Player[]>([
+        { nome: "Pedro", aposta: 0, color: { value: "#fff", contrast: "#999" }, pontos: 0 },
+        { nome: "Ana", aposta: 0, color: { value: "#f54242", contrast: "#ffffff" }, pontos: 0 },
+        { nome: "Carlos", aposta: 0, color: { value: "#42f554", contrast: "#000000" }, pontos: 0 },
+        { nome: "Mariana", aposta: 0, color: { value: "#4287f5", contrast: "#ffffff" }, pontos: 0 },
+        { nome: "João", aposta: 0, color: { value: "#f5a142", contrast: "#000000" }, pontos: 0 },
+        { nome: "Beatriz", aposta: 0, color: { value: "#d142f5", contrast: "#ffffff" }, pontos: 0 },
+        { nome: "Lucas", aposta: 0, color: { value: "#42f5e6", contrast: "#000000" }, pontos: 0 },
+        { nome: "Fernanda", aposta: 0, color: { value: "#f5e642", contrast: "#000000" }, pontos: 0 },
+        { nome: "Rafael", aposta: 0, color: { value: "#a642f5", contrast: "#ffffff" }, pontos: 0 },
+        { nome: "Sofia", aposta: 0, color: { value: "#42f5a6", contrast: "#000000" }, pontos: 0 }
+    ]);
     const [round, setRound] = useState<number>(0);
     const [fase, setFase] = useState<number>(0);
 
@@ -61,7 +72,7 @@ const GameProvider = ({ children }: PropsWithChildren) => {
     return (
         <GameContext.Provider
             value={{
-                players, round, newPlayer, setRound, removePlayer, fase, setFase, score, setBet, resetBet, setPlayers, unscore
+                players, round, newPlayer, setRound, removePlayer, score, setBet, resetBet, setPlayers, unscore
             }}>
             {children}
         </GameContext.Provider>
