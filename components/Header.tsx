@@ -4,13 +4,14 @@ import { useNavigation } from "@react-navigation/native"
 import { Appbar } from "react-native-paper"
 
 type HeaderProps = {
-    title?: string,
+    title: string,
     actions?: Action[]
 }
 
 type Action = {
     icon: string,
-    onPress: () => void
+    onPress: () => void,
+    disabled?: boolean
 }
 
 const Header = ({ title, actions }: HeaderProps) => {
@@ -19,7 +20,7 @@ const Header = ({ title, actions }: HeaderProps) => {
     const navigation = useNavigation()
 
     return (
-        <Appbar.Header>
+        <Appbar.Header >
             {navigation.canGoBack() && <Appbar.BackAction onPress={() => navigation.goBack()} />}
             <Appbar.Content title={title} />
 

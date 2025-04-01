@@ -8,30 +8,29 @@ import { Text, Button } from "react-native-paper"
 
 import Players from "../components/Players"
 
-const Fim = () => {
-    const { players, setPlayers, setFase, setRound } = useContext(GameContext)
+const End = () => {
+    const { players, setPlayers, setRound } = useContext(GameContext)
 
-    const navigate = useNavigation<GameNavigationProp>().navigate
-
+    const navigate = useNavigation<GameNavigationProp>()
+    
     useEffect(() => {
-        setFase(0)
         setRound(0)
         const sortedPlayers = [...players].sort((a, b) => b.pontos - a.pontos)
         setPlayers(sortedPlayers)
     }, [])
 
-    const handleEnding = () => {
-        setPlayers([])
-        navigate("home")
-    }
+    // const handleEnding = () => {
+    //     setPlayers([])
+    //     navigate("home")
+    // }
 
     return (
         <View style={{ padding: 20, height: "100%" }}>
             <Text style={{ textAlign: "center", fontSize: 40 }}>Resultado</Text>
-            <Players removable={false} />
-            <Button mode="contained" onPress={handleEnding}>Finalizar</Button>
+            {/* <Players removable={false} />
+            <Button mode="contained" onPress={handleEnding}>Finalizar</Button> */}
         </View>
     )
 }
 
-export default Fim
+export default End

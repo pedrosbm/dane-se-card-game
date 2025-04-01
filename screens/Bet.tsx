@@ -1,16 +1,16 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { GameContext } from "../context/GameContext"
 import { View } from "react-native"
 import { useNavigation } from "@react-navigation/native"
 import { GameNavigationProp } from "../types/navigation"
-import { Button, Text } from "react-native-paper"
+import { Button, Dialog, Portal, Text } from "react-native-paper"
 
 import Players from "../components/Players"
+import Header from "../components/Header"
 
 const Bet = () => {
+    const [visible, setVisible] = useState<boolean>(false)
     const { round, setRound, resetBet } = useContext(GameContext)
-
-    const fases = ["façam suas apostas", "pontuar"]
 
     const navigation = useNavigation<GameNavigationProp>()
 
@@ -23,21 +23,49 @@ const Bet = () => {
     }
 
     useEffect(() => {
-
+        navigation.setOptions({
+            header: () => <Header
+                title="Aposta"
+                actions={[{
+                    icon: "check",
+                    onPress: () => setVisible(true)
+                }]} />
+        })
     }, [])
 
+    const handleNextStep = () => {
+        setVisible(false)
+        navigation.navigate("score")
+    }
+
     return (
-        <View style={{ height: "100%", padding: 10, gap: 10 }}>
-            <View>
-                <Text style={{ textAlign: "center", fontSize: 40 }}>Round {round}</Text>
+        <>
+            {/* Tela */}
+            <View style={{ height: "100%", padding: 10, gap: 10 }}>
+                <View style={{alignItems: "center"}}>
+                    <Text style={{ textAlign: "center", fontSize: 40 }}>Round {round}</Text>
+                    <Text>Façam suas apostas</Text>
+                </View>
+
+                <View style={{ height: "80%" }}>
+                    <Players fase={1} />
+                </View >
             </View>
 
-            <View style={{ height: "81%" }}>
-                <Players fase={1} />
-            </View >
-
-            {/* TODO avanço para pontuação */}
-        </View>
+            {/* Caixa de dialogo */}
+            <Portal>
+                <Dialog visible={visible} onDismiss={() => setVisible(false)}>
+                    <Dialog.Title>Cuidado</Dialog.Title>
+                    <Dialog.Content>
+                        <Text variant="bodyMedium">Prossiga apenas se todos definiram suas apostas.</Text>
+                    </Dialog.Content>
+                    <Dialog.Actions>
+                        <Button onPress={() => setVisible(false)}>Cancelar</Button>
+                        <Button onPress={handleNextStep}>Próximo</Button>
+                    </Dialog.Actions>
+                </Dialog>
+            </Portal>
+        </>
     )
 }
 

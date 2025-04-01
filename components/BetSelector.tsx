@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Player } from "../types/player";
 import { GameContext } from "../context/GameContext";
 import { View } from "react-native";
-import { Button, IconButton, Text } from "react-native-paper"
+import { Button, Divider, IconButton, Text } from "react-native-paper"
 
 type BetSelectorProps = {
     player: Player,
@@ -18,14 +18,14 @@ const BetSelector = ({ player, disabled }: BetSelectorProps) => {
     }, [value])
 
     return (
-        <View>
+        <View style={{ justifyContent: "center" }}>
             <Text style={{ color: player.color.contrast }}>Aposta</Text>
             <View style={{ flexDirection: "row" }}>
-                <IconButton iconColor={player.color.contrast} icon="minus" disabled={value == 0 || disabled} onPress={() => setValue(value - 1)} />
+                {!disabled && <IconButton iconColor={player.color.contrast} icon="minus" disabled={value == 0} onPress={() => setValue(value - 1)} />}
                 <View style={{ width: 50, alignItems: "center", justifyContent: "center" }}>
                     <Text style={{ fontSize: 15, color: player.color.contrast }}>{player.aposta}</Text>
                 </View>
-                <IconButton iconColor={player.color.contrast} icon="plus" disabled={disabled} onPress={() => setValue(value + 1)} />
+                {!disabled && <IconButton iconColor={player.color.contrast} icon="plus" onPress={() => setValue(value + 1)} />}
             </View>
         </View>
     )

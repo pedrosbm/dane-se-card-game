@@ -2,23 +2,24 @@ import React, { useContext, useState } from "react"
 import { GameContext } from "../context/GameContext"
 import { Button } from "react-native-paper"
 import { Player } from "../types/player"
+import { View } from "react-native"
 
 type scoreProps = {
     player: Player
 }
 
-const Score = ({ player }: scoreProps) => {
-    const [beenScored, setBeenScored] = useState<boolean>(false)
+const ScoreButton = ({ player }: scoreProps) => {
     const { score, unscore } = useContext(GameContext)
 
     const handlePress = () => {
-        beenScored ? unscore(player.nome) : score(player.nome)
-        setBeenScored(!beenScored)
+        player.scored ? unscore(player.nome) : score(player.nome)
     }
 
     return (
-        <Button icon={"plus"} mode="contained" onPress={handlePress}>{beenScored ? "Desfazer" : "Pontuar"}</Button>
+        <View style={{ justifyContent: "center" }}>
+            <Button icon={player.scored ? "undo" : "check"} mode="contained" onPress={handlePress}>{player.scored ? "Desfazer" : "Pontuar"}</Button>
+        </View>
     )
 }
 
-export default Score
+export default ScoreButton

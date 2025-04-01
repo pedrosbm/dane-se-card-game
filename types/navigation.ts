@@ -2,7 +2,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type GameNavigation = {
     bet: undefined,
-    point: undefined,
+    score: undefined,
     end: undefined
 }
 type GameNavigationProp = NativeStackNavigationProp<GameNavigation>;
