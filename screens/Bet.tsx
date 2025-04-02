@@ -7,6 +7,7 @@ import { Button, Dialog, Portal, Text } from "react-native-paper"
 
 import Players from "../components/Players"
 import Header from "../components/Header"
+import DialogModal from "../components/DialogModal"
 
 const Bet = () => {
     const [visible, setVisible] = useState<boolean>(false)
@@ -27,45 +28,24 @@ const Bet = () => {
             header: () => <Header
                 title="Aposta"
                 actions={[{
-                    icon: "check",
-                    onPress: () => setVisible(true)
+                    icon: "arrow-right",
+                    onPress: () => navigation.navigate("score")
                 }]} />
         })
     }, [])
 
-    const handleNextStep = () => {
-        setVisible(false)
-        navigation.navigate("score")
-    }
-
     return (
-        <>
-            {/* Tela */}
-            <View style={{ height: "100%", padding: 10, gap: 10 }}>
-                <View style={{alignItems: "center"}}>
-                    <Text style={{ textAlign: "center", fontSize: 40 }}>Round {round}</Text>
-                    <Text>Façam suas apostas</Text>
-                </View>
-
-                <View style={{ height: "80%" }}>
-                    <Players fase={1} />
-                </View >
+        <View style={{ height: "100%", padding: 10, gap: 10 }}>
+            <View style={{ alignItems: "center" }}>
+                <Text style={{ textAlign: "center", fontSize: 40 }}>Round {round}</Text>
+                <Text>Façam suas apostas</Text>
             </View>
 
-            {/* Caixa de dialogo */}
-            <Portal>
-                <Dialog visible={visible} onDismiss={() => setVisible(false)}>
-                    <Dialog.Title>Cuidado</Dialog.Title>
-                    <Dialog.Content>
-                        <Text variant="bodyMedium">Prossiga apenas se todos definiram suas apostas.</Text>
-                    </Dialog.Content>
-                    <Dialog.Actions>
-                        <Button onPress={() => setVisible(false)}>Cancelar</Button>
-                        <Button onPress={handleNextStep}>Próximo</Button>
-                    </Dialog.Actions>
-                </Dialog>
-            </Portal>
-        </>
+            <View style={{ height: "80%" }}>
+                <Players fase={1} />
+            </View >
+        </View>
+
     )
 }
 

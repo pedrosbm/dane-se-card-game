@@ -1,13 +1,14 @@
 import React, { PropsWithChildren, useContext } from "react"
+
 import { FlatList, View } from "react-native"
 import { GameContext } from "../context/GameContext"
-import { Button, Avatar, Card, Text, IconButton } from "react-native-paper"
+import { Avatar, Card, Text, IconButton } from "react-native-paper"
 
 import BetSelector from "./BetSelector"
 import ScoreButton from "./ScoreButton"
 
 type PlayersProps = {
-    fase: number
+    fase?: number
 }
 
 const Players = ({ fase }: PlayersProps) => {
@@ -23,7 +24,6 @@ const Players = ({ fase }: PlayersProps) => {
                         <View style={{ marginLeft: 10 }}>
                             <Text style={{ color: item.color.contrast }}>{item.nome}</Text>
                             <Text style={{ color: item.color.contrast }}>{item.pontos} Pontos</Text>
-                            <Text style={{ color: item.color.contrast }}>{item.scored ? "sim" : "nao"} scored</Text>
                         </View>
                     </View>
 
